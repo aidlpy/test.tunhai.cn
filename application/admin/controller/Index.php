@@ -1,14 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: zhangxinrong
- * Date: 2020/7/23
- * Time: 1:58 PM
- */
-
 namespace app\admin\controller;
 
-class Index
+use think\Controller;
+
+class Index extends Controller
 {
     public function index()
     {
