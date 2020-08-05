@@ -7,12 +7,19 @@
  */
 namespace app\admin\controller;
 
+use app\admin\common\Base;
+use app\common\model\AdminUser;
 use think\Controller;
+use think\Request;
 
-class Admin extends Controller
+class Admin extends Base
 {
     public function add()
     {
+
+        $this->isLogin();
+
+
         //判断是否是post请求
         if (request()->isPost()){
 
@@ -35,12 +42,17 @@ class Admin extends Controller
             catch (\Exception $e){
                 return ['code' => 0, 'data' => [], 'msg' => $e->getMessage()];
             }
-
         }
         else
         {
             return $this->fetch('add',[]);
         }
+    }
+
+
+    public function adminList(){
+        $this->isLogin();
+        return $this->fetch('adminList');
     }
 
 

@@ -8,20 +8,24 @@
 
 namespace app\admin\controller;
 
+use app\admin\common\Base;
 use think\Controller;
 
-class System extends Controller
+class System extends Base
 {
     public function log()
     {
+        $this->isLogin();
         return $this->fetch('system-log',[]);
     }
 
     public function shielding(){
+        $this->isLogin();
         return $this->fetch('system-shielding',[]);
     }
 
     public function data(){
+        $this->isLogin();
         return $this->fetch('system-data',[]);
     }
 

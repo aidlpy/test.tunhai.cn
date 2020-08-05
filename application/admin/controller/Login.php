@@ -8,47 +8,47 @@
 
 namespace app\admin\controller;
 
+use app\admin\common\Base;
 use app\common\model\AdminUser;
 use think\Controller;
+use think\Session;
 
-class Login extends Controller
+
+class Login extends Base
 {
     public function index()
     {
-        if ($this->request->isPost()){
-            $data = input('post.');
 
+        $this->existLogin();
+
+        if ($this->request->isPost()) {
+            $data = input('post.');
             //验证码检验
             $captcha = $data['captcha'];
-            if (!captcha_check($captcha)){
-               $this->error('验证码错误','login/index');
+            if (!captcha_check($captcha)) {
+                $this->error('验证码错误', 'login/index');
             }
-
             //表单数据检验
             $validate = validate('AdminUser');
             if (!$validate->check($data)) {
-               $this->error($validate->getError(),'login/index');
+                $this->error($validate->getError(), 'login/index');
             }
 
             //用户表查询
             $userModel = AdminUser::get(['username' => $data['username']]);
-            if (!$userModel){
-                $this->error('该用户不存在','login/index');
+            if (!$userModel) {
+                $this->error('该用户不存在', 'login/index');
             }
 
-            if (md5($data['password'].'aidlpy') == $userModel->password){
-                $this->success('登录成功','index/index');
-            }
-            else
-            {
-                $this->error('用户名或密码错误','login/index');
+            if (md5($data['password'] . 'aidlpy') == $userModel->password) {
+                $info = ['user_id'=>$userModel->id,'user_name'=>$userModel->username,'user_status'=>$userModel->status];
+                Session::set('user_info',$info);
+                $this->success('登录成功', 'index/index');
+            } else {
+                $this->error('用户名或密码错误', 'login/index');
             }
         }
-        else
-        {
-            return $this->fetch('login');
-        }
-
+        return $this->fetch('login');
     }
 
 }
