@@ -16,20 +16,20 @@ class System extends Base
     public function log()
     {
         $this->isLogin();
-        return '1111';
-//        return $this->fetch('system-log');
+//        return '1111';
+        return $this->fetch('system-log');
     }
 
     public function shielding(){
         $this->isLogin();
-        return '1111';
-//        return $this->fetch('system-shielding');
+//        return '1111';
+        return $this->fetch('system-shielding');
     }
 
     public function data(){
         $this->isLogin();
-        return '1111';
-//        return $this->fetch('system-data');
+//        return '1111';
+        return $this->fetch('system-data');
     }
 
 }
