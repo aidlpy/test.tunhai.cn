@@ -18,8 +18,6 @@ class Admin extends Base
     {
 
         $this->isLogin();
-
-
         //判断是否是post请求
         if (request()->isPost()){
 
@@ -52,6 +50,10 @@ class Admin extends Base
 
     public function adminList(){
         $this->isLogin();
+        $list = AdminUser::all(['status'=>1]);
+        $this->assign([
+            '$users' => $list
+        ]);
         return $this->fetch('adminList');
     }
 
