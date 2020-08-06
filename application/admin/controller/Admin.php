@@ -7,7 +7,7 @@
  */
 namespace app\admin\controller;
 
-use app\admin\common\Base;
+
 use app\common\model\AdminUser;
 use think\Controller;
 use think\Request;

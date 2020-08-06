@@ -6,7 +6,7 @@
  * Time: 5:48 PM
  */
 
-namespace app\admin\common;
+namespace app\admin\controller;
 
 use think\Controller;
 use think\Request;

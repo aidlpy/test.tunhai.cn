@@ -8,9 +8,9 @@
 
 namespace app\admin\controller;
 
-use app\admin\common\Base;
 use app\common\model\AdminUser;
 use think\Controller;
+use think\Request;
 use think\Session;
 
 
@@ -41,6 +41,9 @@ class Login extends Base
             }
 
             if (md5($data['password'] . 'aidlpy') == $userModel->password) {
+                $userModel->last_login_ip = $this->request->ip();
+                $userModel->last_login_time = time();
+                $userModel->save();
                 $info = ['user_id'=>$userModel->id,'user_name'=>$userModel->username,'user_status'=>$userModel->status];
                 Session::set('user_info',$info);
                 $this->success('登录成功', 'index/index');
@@ -49,6 +52,11 @@ class Login extends Base
             }
         }
         return $this->fetch('login');
+    }
+
+    public function loginOut(){
+        Session::set('user_info',null);
+        $this->redirect('login/index');
     }
 
 }

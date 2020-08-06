@@ -22,7 +22,6 @@ class AdminUser extends Model{
         if (!is_array($data)){
            return $this->getError('数据格式不合法');
         }
-
         $this->allowField(true)->save($data);
         return $this->id;
     }

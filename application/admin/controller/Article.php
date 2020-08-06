@@ -7,7 +7,7 @@
  */
 namespace app\admin\controller;
 
-use app\admin\common\Base;
+
 use think\Controller;
 
 
