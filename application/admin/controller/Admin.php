@@ -6,10 +6,9 @@
  * Time: 5:17 PM
  */
 namespace app\admin\controller;
-
-
 use app\common\model\AdminUser;
 use think\Controller;
+use think\Model;
 use think\Request;
 
 class Admin extends Base
@@ -49,11 +48,10 @@ class Admin extends Base
 
 
     public function adminList(){
-        $this->isLogin();
-        $list = AdminUser::all(['status'=>1]);
-        $this->assign([
-            '$users' => $list
-        ]);
+      $result = model('AdminUser')->getUsers();
+      if (!empty($result)){
+            $this->assign('inf',$result);
+      }
         return $this->fetch('adminList');
     }
 

@@ -8,7 +8,8 @@ class Index extends Base
     public function index()
     {
         $this->isLogin();
-        return $this->fetch();
+        $info = session('user_info');
+        return $this->fetch('index',['username'=> $info['user_name']]);
     }
 
     public function welcome(){

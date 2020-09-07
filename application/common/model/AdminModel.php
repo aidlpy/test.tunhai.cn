@@ -2,13 +2,13 @@
 /**
  * Created by PhpStorm.
  * User: zhangxinrong
- * Date: 2020/8/4
- * Time: 5:02 PM
+ * Date: 2020/9/6
+ * Time: 8:42 PM
  */
 namespace app\common\model;
 use think\Model;
 
-class AdminUser extends Model{
+class AdminModel extends Model{
 
     protected $autoWriteTimestamp = true;
 
@@ -20,16 +20,16 @@ class AdminUser extends Model{
     public function add($data){
 
         if (!is_array($data)){
-           return $this->getError('数据格式不合法');
+            return $this->getError('数据格式不合法');
         }
         $this->allowField(true)->save($data);
         return $this->id;
     }
 
 
-    public function getUsers(){
+    public function getModel(){
 
-        $result = $this->where(['status'=>1])->paginate();
+        $result = $this->where(['catid'=>1])->paginate();
         return $result;
 
     }

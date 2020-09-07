@@ -19,7 +19,23 @@
         "php": ">=5.4.0",
         "topthink/framework": "5.0.*",
         "topthink/think-captcha": "1.*",
-        "twbs/bootstrap": "^4.5"
+        "twbs/bootstrap": "^4.5",
+        "firebase/php-jwt": "^5.2",
+        "qiniu/php-sdk": "^7.2"
+    },
+    "scripts":{
+        "post-update-cmd": [
+            "rm -rf public/static/bootstrap",
+            "mkdir -p public/static/bootstrap",
+            "cp -R vendor/twbs/bootstrap/dist public/static/bootstrap",
+            "rm -rf vendor/twbs"
+        ],
+        "post-install-cmd": [
+            "rm -rf public/static/bootstrap",
+            "mkdir -p public/static/bootstrap",
+            "cp -R vendor/twbs/bootstrap/dist public/static/bootstrap",
+            "rm -rf vendor/twbs"
+        ]
     },
     "autoload": {
         "psr-4": {
@@ -32,4 +48,5 @@
     "config": {
         "preferred-install": "dist"
     }
+
 }

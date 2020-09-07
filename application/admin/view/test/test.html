@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+ <head>
+      <meta charset="UTF-8">
+      <title>ajax交互</title>
+      <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+     </head>
+<body>
+    <input type="file" name="file" id="file">
+
+    <!--<input id="file" type="file" name="file">-->
+    <!--<div id="uploadImg" style="width: 500px; height: 500px;">-->
+    <!--</div>-->
+ <script>
+     document.querySelector("#file").addEventListener('change',function() {
+         var filesList = document.querySelector('#file').files;
+         var formData = new FormData();
+         formData.append("file",filesList[0]);
+         $.ajax({
+            url:"{:url('admin/test/uploadToQN')}",
+            type:"POST",
+            data:formData,
+            processData:false,
+            contentType:false,
+            success:function (response) {
+                if (response["code"] == 1){
+                    console.log(JSON.stringify(response["data"]));
+                    var src = response["data"]["imageURL"];
+                    var inputFile = document.getElementById("file");
+                    if (document.getElementById("img")) {
+                        img.src = src;
+                    }
+                    else {
+                        var img =document.createElement("img");
+                        img.src = src;
+                        img.width = "60";
+                        img.height = "60";
+                        inputFile.parentNode.appendChild(img);
+                    }
+
+                }
+
+            }
+         });
+    });
+</script>
+ 
+ </body>
+
+<script>
+    // document.querySelector("#file").addEventListener('change',function() {
+    //
+    //     var filesList = document.querySelector('#file').files;
+    //     var formData = new FormData();
+    //     var file = filesList[0];
+    //     formData.append("file",file);
+    //     formData.append("test","121212");
+    //     alert(JSON.stringify(formData));
+    //     console.log(formData);
+    //     $.ajax({
+    //         type:"post",
+    //         url:"{:url('admin/test/uploadToQN')}",  //数据传输的控制器方法
+    //         data:formData,//这里data传递过去的是序列化以后的字符串
+    //         success:function(data){
+    //             console.log("收到回调");
+    //             alert(JSON.stringify(data));
+    //                 // $("#content").append(data);//获取成功以后输出返回
+    //         },
+    //         error: function(msg) {//ajax请求失败后触发的方法
+    //             alert(JSON.stringify(msg)); //弹出错误信息
+    //         }
+    //     });
+    // })
+    // function ajaxPost(){
+    //     var formData = $("#myform").serialize();
+    //     //serialize() 方法通过序列化表单值，创建 URL 编码文本字符串,这个是jquery提供的方
+    //     $.ajax({
+    //         type:"post",
+    //         url:"{:url('admin/test/uploadToQN')}",  //数据传输的控制器方法
+    //         data:formData,//这里data传递过去的是序列化以后的字符串
+    //         success:function(data){
+    //             alert(JSON.stringify(data));
+    //             // $("#content").append(data);//获取成功以后输出返回
+    //         }
+    //     });
+    // }
+</script>
+</html>

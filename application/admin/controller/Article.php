@@ -7,14 +7,16 @@
  */
 namespace app\admin\controller;
 
-
-use think\Controller;
-
-
 class Article extends Base
 {
     public function index(){
         $this->isLogin();
         return $this->fetch('article-list');
+    }
+
+    public function  add(){
+        $this->isLogin();
+        $cats = config('news_cats');
+        return $this->fetch('article-add',['cats' =>$cats]);
     }
 }
